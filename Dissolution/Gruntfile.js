@@ -2,30 +2,69 @@ module.exports = function (grunt) {
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
 
-    // watch: {
-    //   styles: {
-    //     files: ["css/less/*"],
-    //     tasks: ["less:development"],
-    //     options: {
-    //       livereload: true
-    //     }
-    //   },
-    // }, // end watch
+    // Watch
+    watch: {
+      less: {
+        files: ["src/less/*"],
+        tasks: ["less:dev"],
+        options: {
+          livereload: true
+        }
+      },
+      jade: {
+        files: ["src/jade/*"],
+        tasks: ["jade:dev"],
+        options: {
+          livereload: true
+        }
+      },
+    }, // end watch
 
-    // less: {
-    //   development: {
-    //     options: {
-    //       paths: ["css/less"]
-    //     },
-    //     files: {
-    //       "css/main.css": "css/less/main.less"
-    //     }
-    //   }
-    // } // end LESS
+    // LESS
+    less: {
+      dev: {
+        options: {
+          yuicompress: false,
+        },
+        files: {
+          "app/css/app.css": "src/less/app.less"
+        }
+      },
+      prod: {
+        options: {
+          yuicompress: true,
+        },
+        files: {
+          "app/css/app.css": "src/less/app.less"
+        }
+      }
+    }, // end LESS
 
-    // jade: {
-    //
-    // }
+    // Jade
+    jade: {
+      dev: {
+        options: {
+          pretty: true,
+          data: {
+            env: 'dev'
+          }
+        },
+        files: {
+          'app/index.html': 'src/jade/index.jade'
+        }
+      },
+      prod: {
+        options: {
+          pretty: false,
+          data: {
+            env: 'prod'
+          }
+        },
+        files: {
+          'app/index.html': 'src/jade/index.jade'
+        }
+      },
+    } // end Jade
 
   });
 
@@ -35,5 +74,7 @@ module.exports = function (grunt) {
 
   // Default task(s).
   grunt.registerTask('default', ['watch']);
+  grunt.registerTask('dev', ['less:dev', 'jade:dev']);
+  grunt.registerTask('prod', ['less:prod', 'jade:prod']);
 
 };
