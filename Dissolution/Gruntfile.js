@@ -64,13 +64,19 @@ module.exports = function (grunt) {
           'app/index.html': 'src/jade/index.jade'
         }
       },
-    } // end Jade
+    }, // end Jade
+
+    // JSHint
+    jshint: {
+      all: ['Gruntfile.js', 'app/js/*.js']
+    }
 
   });
 
   grunt.loadNpmTasks('grunt-contrib-less');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-jade');
+  grunt.loadNpmTasks('grunt-contrib-jshint');
 
   // Default task(s).
   grunt.registerTask('default', ['watch']);
