@@ -1,0 +1,13 @@
+!!!
+html(ng-app)
+  head
+    title The Application
+    script(type="text/javascript", src="lib/angular/angular.min.js")
+
+  body
+    h1 Welcome
+
+    p Your model is {{yourModel}}
+
+    form
+      textarea(ng-model="yourModel")
